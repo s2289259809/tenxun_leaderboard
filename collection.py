@@ -10,7 +10,7 @@ logger = log.logger
 headers = {
     'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; vivo Y67A Build/MRA58K; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/6.2 TBS/045008 Mobile Safari/537.36 V1_AND_SQ_8.3.3_1376_YYB_D QQ/8.3.3.4515 NetType/WIFI WebP/0.3.0 Pixel/720 StatusBarHeight/49 SimpleUISwitch/0 QQTheme/1000',
     # 'cookie':str(denglu)
-    'cookie': 'pgv_pvi=8369590272; RK=ekoduLjnSR; ptcz=38f4959b2f16ac0de36b998d9c0bb3f9a3410f4ba32aae8d9564420c8d092416; ts_refer=ui.ptlogin2.qq.com/cgi-bin/login; pgv_pvid=3781160700; ts_uid=6019751887; ptui_loginuin=1542183954; pac_uid=1_2289259809; tvfe_boss_uuid=39e25883eefd9139; o_cookie=657110547; _qpsvr_localtk=1599105106840; uin=o0657110547; skey=@aWF37Y642; p_uin=o0657110547; pt4_token=lDqNNIruuGJY8WCffMC8Wdvc0DexpndRXUs5pa5aRJQ_; p_skey=Hh35ZmGfhx8mR9cRf3unk0w1pD9Kenu04t94pu9qV7M_; pgv_info=ssid=s1691600697; ts_last=zb.vip.qq.com/v2/pages/itemDetail',
+    'cookie': 'pgv_pvi=8369590272; RK=ekoduLjnSR; ptcz=38f4959b2f16ac0de36b998d9c0bb3f9a3410f4ba32aae8d9564420c8d092416; pgv_pvid=3781160700; ts_refer=ui.ptlogin2.qq.com/cgi-bin/login; ts_uid=6019751887; ptui_loginuin=1542183954; pac_uid=1_2289259809; tvfe_boss_uuid=39e25883eefd9139; o_cookie=657110547; luin=o2289259809; lskey=000100001daee4081f118fa73e4b9c020af82eb7a6f313587365fa9d17f6814f48788a743aed52230dbc87b9; pgv_info=ssid=s6499083021; uin=o0657110547; p_uin=o0657110547; skey=@jyJb2tMf4; pt4_token=Xj3-dVWd3MC1hUkGZZWTmDS0gLdNPu91uYGH47DR2ZI_; p_skey=MnhDkCf22mme7VzmQFOkXWTDUFA7qHQ4etbZWqdNXsY_; ts_last=zb.vip.qq.com/v2/pages/itemDetail',
     'referer': 'https://zb.vip.qq.com/v2/pages/itemDetail?appid=2&itemid=10871&_nav_titleclr=000000&_nav_txtclr=000000',
     'sec-fetch-site': 'same-origin',
     'sec-fetch-dest': 'empty',
@@ -188,10 +188,14 @@ def data_collection_card(mub_card):
 
 def start():
 
-    theme = Process(target=data_collection_theme, args=(1023073,))
-    bubble = Process(target=data_collection_bubble, args=(25600,))
+    # theme = Process(target=data_collection_theme, args=(1023073,))
+    theme = Process(target=data_collection_theme, args=(1024010,))
+    # bubble = Process(target=data_collection_bubble, args=(25600,))
+    bubble = Process(target=data_collection_bubble, args=(26235,))
+    # Pendant = Process(target=data_collection_Pendant, args=(10223,))
     Pendant = Process(target=data_collection_Pendant, args=(10223,))
-    card = Process(target=data_collection_card, args=(8100,))
+    # card = Process(target=data_collection_card, args=(8100,))
+    card = Process(target=data_collection_card, args=(8300,))
     theme.start()
     bubble.start()
     Pendant.start()
