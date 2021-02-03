@@ -1,4 +1,4 @@
-import pymysql
+import pymysql,datetime
 class SqlHelper(object):
     def __init__(self):
         self.connect()
@@ -33,3 +33,9 @@ class SqlHelper(object):
     def close(self):
         self.cursor.close()
         self.db.close()
+
+def Time_Stamp(time):
+    imeStamp = int(time)
+    dateArray = datetime.datetime.utcfromtimestamp(imeStamp)
+    otherStyleTime = dateArray.strftime("%Y-%m-%d %H:%M:%S")
+    return otherStyleTime
