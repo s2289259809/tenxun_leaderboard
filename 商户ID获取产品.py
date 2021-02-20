@@ -42,13 +42,17 @@ def Get_Business_Id():
     obj.close()
 
 def Updata_time(skey,supplyerid):
-    url = "https://zb.vip.qq.com/trpc/cgi?daid=18&g_tk=102440051"
+    print(supplyerid)
+    url = "https://zb.vip.qq.com/trpc/cgi?daid=18&g_tk=1971637356"
     for i in range(0,20):
-        payload = "{\"namespace\":\"beautyMall\",\"cmd\":\"SupplyerInfo\",\"data\":{\"stlogin\":{\"ikeytype\":1,\"iopplat\":3,\"uin\":657110547,\"sclientip\":\"\",\"skey\":\"@%s\"},\"supplyerid\":%s,\"nextID\":%s,\"Pagesize\":20}}"%(skey,supplyerid,i*20)
+        payload = "{\"namespace\":\"beautyMall\",\"cmd\":\"SupplyerInfo\",\"data\":{\"stlogin\":{\"ikeytype\":1,\"iopplat\":3,\"uin\":1542183954,\"sclientip\":\"\",\"skey\":\"@%s\"},\"supplyerid\":%s,\"nextID\":%s,\"Pagesize\":20}}"%(skey,supplyerid,i*20)
         resp = requests.request("POST", url, headers=headers, data=payload.encode())
+        # print(resp.text)
         try:
             b = json.loads(str(resp.text))
+            # print(b['data'])
             author = b['data']['supplyername']
+            # print('-------------------------------------------------')
             for i in b['data']['rpt_openitem']:
                 product_url = 'https://zb.vip.qq.com/v2/pages/itemDetail?appid=%s&itemid=%s&_nav_titleclr=000000&_nav_txtclr=000000' % (
                     i['appid'], i['itemid'])
@@ -56,7 +60,7 @@ def Updata_time(skey,supplyerid):
                 name = re.findall('{"appId":[0-9],"itemId":[0-9]*,"name":"(.*)","feeType":[0-9],"image"', product, re.S)[0]
                 sql_in(i['itemid'], name, i['likecnt'], i['appid'], get_mysql.Time_Stamp(i['onlinetime']), author)
         except Exception as e:
-            print(e)
+            print('错误%s'%e)
 
 def sql_in(mub, name, like, nub,date, author):
     obj = get_mysql.SqlHelper()
@@ -82,11 +86,11 @@ def sql_in(mub, name, like, nub,date, author):
     obj.close()
 
 if __name__ == '__main__':
-    headers('ptcz=524226d2afe911330fbfb452ece92c88adaf537005227086da273eb7e9063cd5; pgv_pvi=2405019648; RK=8qQlllsT7n; pgv_pvid=6010152923; ts_refer=ui.ptlogin2.qq.com/; ts_uid=5448687400; uin=o0657110547; skey=@xzW6FNTIS; p_uin=o0657110547; pt4_token=Xdd3*zhwp4-t*s1TPmcqBPAjYO*IMTU0jyAZ21b6yvE_; p_skey=gFlO5VEjkFXuHkXrvB-XjCMvxb26vtWxfq7slDGD9pE_; pgv_info=ssid=s4539851505; ts_last=zb.vip.qq.com/v2/pages/beautyMall')
+    headers('ptcz=524226d2afe911330fbfb452ece92c88adaf537005227086da273eb7e9063cd5; pgv_pvi=2405019648; RK=8qQlllsT7n; pgv_pvid=6010152923; ts_refer=ui.ptlogin2.qq.com/; ts_uid=5448687400; uin=o1542183954; skey=@ylqMCcxA0; p_uin=o1542183954; pt4_token=zIt0WsJnGfr7Wu9WOAR2dfkct2LMd0dVv43haveB5aw_; p_skey=nJEb3ppj-ZvxIftuW7MH2keeR7nEl32ZFBgGWK4-oV0_; pgv_info=ssid=s2982446144; ts_last=zb.vip.qq.com/v2/pages/beautyMall')
 
     obj = get_mysql.SqlHelper()
     aa = obj.get_list('SELECT * FROM `tenxun_business`',[])
     for a in aa:
-        Updata_time('xzW6FNTIS',a['tenxun_business_id'])
+        Updata_time('ylqMCcxA0',a['tenxun_business_id'])
     obj.close()
     # print(get_mysql.Time_Stamp(1592207153))
