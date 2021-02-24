@@ -28,10 +28,11 @@ obj = get_mysql.SqlHelper()
 
 
 def get_sql(id_tenxun, name, like, type, author):
-    '''主题：1
+    '''主题：1   3
        气泡：2
-       名片：3
-       挂件：4'''
+       名片：3   15
+       挂件：4
+       背景：8'''
     obj = get_mysql.SqlHelper()
     obj.modify('INSERT INTO tenxun_preview(tenxun_id,tenxun_name,likes,type,author) VALUES (%s,%s,%s,%s,%s)',
                [id_tenxun, name, like, type, author])

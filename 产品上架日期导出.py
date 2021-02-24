@@ -1,6 +1,6 @@
-import get_mysql
 import requests,re,datetime,json,time,random
-from multiprocessing import Pool, Manager, Process
+import pandas as pd
+import get_mysql
 
 def Headers(cookies):
     headers = {
@@ -17,30 +17,6 @@ def Headers(cookies):
         'cookie': str(cookies)
     }
     return headers
-
-def Get_Business_Id():
-    obj = get_mysql.SqlHelper()
-    author_name = obj.get_list('SELECT author FROM `tenxun_preview` GROUP BY author', [])
-    for i in author_name:
-        print(i['author'])
-        tenxun_nub = obj.get_one("SELECT tenxun_id,type FROM `tenxun_preview` WHERE author = %s", [i['author'], ])
-        print(tenxun_nub)
-        try:
-            product_url = 'https://zb.vip.qq.com/v2/pages/itemDetail?appid=%s&itemid=%s&_nav_titleclr=000000&_nav_txtclr=000000' % (
-            tenxun_nub['type'], tenxun_nub['tenxun_id'])
-            product_re = requests.get(url=product_url, headers=Headers)
-            tenxun_business_id = re.findall('productId":([0-9]*)', product_re.text, re.S)[0]
-            tenxun_business_name = re.findall('ata-v-4c6112a2>由(.*)提供&gt;</span></p><', product_re.text, re.S)[0]
-            try:
-                obj.modify('INSERT INTO tenxun_business(tenxun_business_id,tenxun_business_name) VALUES(%s,%s)',
-                           [tenxun_business_id, tenxun_business_name])
-            except Exception as e:
-                print(e)
-            print(tenxun_business_id, tenxun_business_name)
-            print('--------------------------------------------------------')
-        except Exception as e:
-            print(e)
-    obj.close()
 
 def Updata_time(skey,supplyerid,cookies):
     print(skey,supplyerid)
@@ -107,18 +83,6 @@ def Get_Name(txt):
     return b['itemInfo']['name']
 
 if __name__ == '__main__':
-    # Updata_time('tb7CWyXq8', '1111236025')
-
-    pool = Pool(3)
-    obj = get_mysql.SqlHelper()
-    aa = obj.get_list('SELECT * FROM `tenxun_business`',[])
-    for a in aa:
-        Headers(
-        # print(a['tenxun_business_id'])
-        pool.apply_async(Updata_time,args=('tb7CWyXq8',a['tenxun_business_id'],'ptcz=524226d2afe911330fbfb452ece92c88adaf537005227086da273eb7e9063cd5; pgv_pvi=2405019648; RK=8qQlllsT7n; pgv_pvid=6010152923; ts_refer=ui.ptlogin2.qq.com/; ts_uid=5448687400; uin=o1542183954; skey=@tb7CWyXq8; p_uin=o1542183954; pt4_token=mjvMMwYXW65l0yW8p8g1NnsU-FrHBvi9Mc*9yPHaAas_; p_skey=9hT6DngDJuv7kEu7P1dgzF3hFe89mo*PsoTCqVZl3UE_; pgv_info=ssid=s2262208794; ts_last=zb.vip.qq.com/v2/pages/beautyMall',)))
-        time.sleep(random.uniform(0.1, 0.5))
-    obj.close()
-    pool.close()
-    pool.join()  # 进程池中进程执行完毕后再关闭，如果注释，那么程序直接关闭。
-    print('end')
-    # print(get_mysql.Time_Stamp(1592207153))
+    Updata_time('tb7CWyXq8','1110633869','ptcz=524226d2afe911330fbfb452ece92c88adaf537005227086da273eb7e9063cd5; pgv_pvi=2405019648; RK=8qQlllsT7n; pgv_pvid=6010152923; ts_refer=ui.ptlogin2.qq.com/; ts_uid=5448687400; uin=o1542183954; skey=@tb7CWyXq8; p_uin=o1542183954; pt4_token=mjvMMwYXW65l0yW8p8g1NnsU-FrHBvi9Mc*9yPHaAas_; p_skey=9hT6DngDJuv7kEu7P1dgzF3hFe89mo*PsoTCqVZl3UE_; pgv_info=ssid=s2262208794; ts_last=zb.vip.qq.com/v2/pages/beautyMall')
+    Updata_time('tb7CWyXq8','1110311890','ptcz=524226d2afe911330fbfb452ece92c88adaf537005227086da273eb7e9063cd5; pgv_pvi=2405019648; RK=8qQlllsT7n; pgv_pvid=6010152923; ts_refer=ui.ptlogin2.qq.com/; ts_uid=5448687400; uin=o1542183954; skey=@tb7CWyXq8; p_uin=o1542183954; pt4_token=mjvMMwYXW65l0yW8p8g1NnsU-FrHBvi9Mc*9yPHaAas_; p_skey=9hT6DngDJuv7kEu7P1dgzF3hFe89mo*PsoTCqVZl3UE_; pgv_info=ssid=s2262208794; ts_last=zb.vip.qq.com/v2/pages/beautyMall')
+    Updata_time('tb7CWyXq8','1110672037','ptcz=524226d2afe911330fbfb452ece92c88adaf537005227086da273eb7e9063cd5; pgv_pvi=2405019648; RK=8qQlllsT7n; pgv_pvid=6010152923; ts_refer=ui.ptlogin2.qq.com/; ts_uid=5448687400; uin=o1542183954; skey=@tb7CWyXq8; p_uin=o1542183954; pt4_token=mjvMMwYXW65l0yW8p8g1NnsU-FrHBvi9Mc*9yPHaAas_; p_skey=9hT6DngDJuv7kEu7P1dgzF3hFe89mo*PsoTCqVZl3UE_; pgv_info=ssid=s2262208794; ts_last=zb.vip.qq.com/v2/pages/beautyMall')
