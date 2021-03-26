@@ -12,7 +12,7 @@ def Headers(cookies):
         'sec-fetch-site': 'same-origin',
         'sec-fetch-mode': 'cors',
         'sec-fetch-dest': 'empty',
-        'referer': 'https://zb.vip.qq.com/v2/pages/beautyMall?supplyerid=1110633869',
+        'referer': 'https://zb.vip.qq.com/v2/pages/beautyMall?supplyerid=1337856035',
         'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
         'cookie': str(cookies)
     }
@@ -44,8 +44,8 @@ def Get_Business_Id():
 
 def Updata_time(skey,supplyerid,cookies):
     print(skey,supplyerid)
-    url = "https://zb.vip.qq.com/trpc/cgi?daid=18&g_tk=1971637356"
-    for i in range(0,20):
+    url = "https://zb.vip.qq.com/trpc/cgi?daid=18&g_tk=291128172"
+    for i in range(0,3):
         time.sleep(1)
         payload = "{\"namespace\":\"beautyMall\",\"cmd\":\"SupplyerInfo\",\"data\":{\"stlogin\":{\"ikeytype\":1,\"iopplat\":3,\"uin\":1542183954,\"sclientip\":\"\",\"skey\":\"@%s\"},\"supplyerid\":%s,\"nextID\":%s,\"Pagesize\":20}}"%(skey,supplyerid,i*20)
         resp = requests.post(url=url,headers=Headers(cookies), data=payload)
@@ -86,6 +86,8 @@ def sql_in(mub, name, like, nub,date, author):
         print('主题,%s,%s,%s,id%s,时间%s' % (name, like, author, mub,date))
     if nub == 2:
         print('气泡,%s,%s,%s,id%s,时间%s' % (name, like, author, mub,date))
+    if nub == 23:
+        print('头像,%s,%s,%s,id%s,时间%s' % (name, like, author, mub,date))
     try:
         obj.modify(
             'INSERT INTO tenxun_preview(tenxun_id,tenxun_name,likes,type,date ,author) VALUES (%s,%s,%s,%s,%s,%s)',
@@ -115,7 +117,7 @@ if __name__ == '__main__':
     for a in aa:
         Headers(
         # print(a['tenxun_business_id'])
-        pool.apply_async(Updata_time,args=('tb7CWyXq8',a['tenxun_business_id'],'ptcz=524226d2afe911330fbfb452ece92c88adaf537005227086da273eb7e9063cd5; pgv_pvi=2405019648; RK=8qQlllsT7n; pgv_pvid=6010152923; ts_refer=ui.ptlogin2.qq.com/; ts_uid=5448687400; uin=o1542183954; skey=@tb7CWyXq8; p_uin=o1542183954; pt4_token=mjvMMwYXW65l0yW8p8g1NnsU-FrHBvi9Mc*9yPHaAas_; p_skey=9hT6DngDJuv7kEu7P1dgzF3hFe89mo*PsoTCqVZl3UE_; pgv_info=ssid=s2262208794; ts_last=zb.vip.qq.com/v2/pages/beautyMall',)))
+        pool.apply_async(Updata_time,args=('rJeBU2d25',a['tenxun_business_id'],'ptcz=524226d2afe911330fbfb452ece92c88adaf537005227086da273eb7e9063cd5; pgv_pvi=2405019648; RK=8qQlllsT7n; ts_refer=ui.ptlogin2.qq.com/; pgv_pvid=6010152923; ts_uid=5448687400; uin=o1542183954; skey=@rJeBU2d25; p_uin=o1542183954; pt4_token=dPYK2iFMSny9ZtAOUjLuh6fZlyZjqQqY7vcoK0Omv5g_; p_skey=3DUa51n*bcRFeY84AE-YU1u8QG0g7LAIvLlgEUez1Qk_; pgv_info=ssid=s9152060960; ts_last=zb.vip.qq.com/v2/pages/beautyMall',)))
         time.sleep(random.uniform(0.1, 0.5))
     obj.close()
     pool.close()
