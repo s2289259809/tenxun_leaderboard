@@ -10,13 +10,13 @@ def ss():
 def aa():
     url = 'https://qqui.qq.com/api/common/admin/DataModel?gtk='
     headers = {
-        'cookie': 'pgv_pvi=8369590272; RK=ekoduLjnSR; ptcz=38f4959b2f16ac0de36b998d9c0bb3f9a3410f4ba32aae8d9564420c8d092416; pgv_pvid=3781160700; tvfe_boss_uuid=39e25883eefd9139; _ga=GA1.2.20279293.1603765697; pt_235db4a7=uid=iMKbC5DovVdcTsJlaVEo2Q&nid=0&vid=oBBwJA1a1tIdWVPkq0NgMg&vn=2&pvn=1&sact=1607476417354&to_flag=0&pl=0KzaISwJA-wYoyVB1nkjpQ*pt*1607476417354; iip=0; eas_sid=a1L6z1v2j5D7M4a3c4N043l5s5; LW_sid=I1J6z1J2r5y7R4A485g8B7B6K5; LW_uid=r1q6o1A2w5R7r404n598R7U6n7; o_cookie=1542183954; pac_uid=1_1542183954; quid=98d35893b3fe8caea08a9597e34ac9ff; qticket=8e878b31f29c1ed8381f4f2f5d3ba85f; quin=2289259809',
+        'cookie': 'pgv_pvi=8369590272; RK=ekoduLjnSR; ptcz=38f4959b2f16ac0de36b998d9c0bb3f9a3410f4ba32aae8d9564420c8d092416; pgv_pvid=3781160700; tvfe_boss_uuid=39e25883eefd9139; _ga=GA1.2.20279293.1603765697; pt_235db4a7=uid=iMKbC5DovVdcTsJlaVEo2Q&nid=0&vid=oBBwJA1a1tIdWVPkq0NgMg&vn=2&pvn=1&sact=1607476417354&to_flag=0&pl=0KzaISwJA-wYoyVB1nkjpQ*pt*1607476417354; iip=0; eas_sid=a1L6z1v2j5D7M4a3c4N043l5s5; LW_sid=I1J6z1J2r5y7R4A485g8B7B6K5; LW_uid=r1q6o1A2w5R7r404n598R7U6n7; o_cookie=1542183954; pac_uid=1_1542183954; luin=o2289259809; lskey=00010000c6096513b8e4a113857b4bfc380fd335a56eb233115bf741f15829c84ba81737ac9e08a7c0d236d4; vfwebqq=b42e714add71f0d961ab2941554d4fff7843f5df954abc95b83702dcc0a8fbed13c2649ad5184297; _qpsvr_localtk=1617179937271; quid=98d35893b3fe8caea08a9597e34ac9ff; qticket=b79a8a7b330f02eb186f0625c9852fc7; quin=2289259809',
         'origin': 'https://qqui.qq.com',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'
     }
-    start = datetime.datetime.strptime('20210101', '%Y%m%d')
+    start = datetime.datetime.strptime('20210316', '%Y%m%d')
     total = []
-    for i in range(0,54):
+    for i in range(0,17):
         print(i)
         atime = start + datetime.timedelta(days=i)
         con = True
